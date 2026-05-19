@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Editor from "@monaco-editor/react";
 import Select from "react-select";
 
+
 const App = () => {
   const options = [
     { value: "javascript", label: "JavaScript" },
@@ -79,7 +80,7 @@ const App = () => {
       setLoading(true);
       setResponse("Reviewing your code...");
 
-      const response = await fetch("http://localhost:8000/api/review", {
+      const response = await fetch(import.meta.env.VITE_API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
