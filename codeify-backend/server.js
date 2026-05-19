@@ -25,11 +25,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ success: false, error: err.message });
 });
 
-// Start server only in development
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log(`Codeify backend server is running on port ${PORT}`);
-  });
-}
-
-export default app;
+// Start server
+app.listen(PORT, () => {
+  console.log(`Codeify backend server is running on port ${PORT}`);
+});

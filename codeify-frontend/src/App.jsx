@@ -79,7 +79,7 @@ const App = () => {
       setLoading(true);
       setResponse("Reviewing your code...");
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/review`, {
+      const response = await fetch("http://localhost:8000/api/review", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -100,7 +100,7 @@ const App = () => {
     } catch (error) {
       console.error(error);
       setResponse(
-        "Error generating review. Make sure the backend server is running."
+        "Error generating review. Make sure the backend server is running on http://localhost:5000"
       );
     } finally {
       setLoading(false);

@@ -14,8 +14,7 @@ export const reviewCode = async (req, res) => {
     }
 
     // Prompt
-    const prompt = `
-You are an expert senior software engineer and professional code reviewer.
+    const prompt = `You are an expert senior software engineer and professional code reviewer.
 
 Analyze the given ${language} code and provide a complete review in the following format:
 
@@ -24,8 +23,6 @@ Analyze the given ${language} code and provide a complete review in the followin
 
 ## What the Code Does
 Explain step by step in simple words.
-
-## Code Output if Without Error and if error tell where the error is like a code editor does
 
 ## Strengths
 - List what is done well.
@@ -46,33 +43,27 @@ Explain step by step in simple words.
 Provide a better version of the code if improvements are needed.
 
 Code:
-${code}
-`;
+${code}`;
 
-    // OpenRouter API Call
-    const response = await genAI.models.generateContent({
-            model: "gemini-2.5-flash",
-            contents: prompt,
-        });
-
-    const review =
-      response ||
-      "No review generated.";
+    // Call Gemini API
+    const response = await genAI.models.generateContent({ model: "gemini-2.5-flash" , contents: prompt});
+    //const result = await model.generateContent(prompt);
+    
 
     return res.status(200).json({
       success: true,
-      review:response.text,
+      review: response.text,
     });
   } catch (error) {
     console.error(
       "Error during code review:",
-      error.response?.data || error.message
+      error.message
     );
 
     return res.status(500).json({
       success: false,
       message: "Failed to generate review.",
-      error: error.response?.data || error.message,
+      error: error.message,
     });
   }
 };
